@@ -1,0 +1,16 @@
+.user {
+display: flex;
+    text-decoration: none;
+font-size: 20px;
+    color: white;
+}
+
+.user_a {
+padding: 10px;
+    color: black;
+
+}
+.li {
+    color: black;
+    padding: 10px;
+}
