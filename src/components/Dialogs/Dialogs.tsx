@@ -4,14 +4,16 @@ import {NavLink, useParams} from "react-router-dom";
 import {dialog, T_DialogsData} from "../data";
 
 type T_DialogType = {
-    name: string
     id: string
+    name: string
+
 }
 
 export const DialogItems = (props: T_DialogType) => {
     return <div>
         <NavLink to={`/messages/${props.id}`}>{props.name}</NavLink>
     </div>
+
 }
 
 type T_params = {
@@ -22,19 +24,25 @@ type T_DialogsItems = {
 }
 export const Dialogs = (props:T_DialogsItems) => {
     const params = useParams<T_params>()
-    // const dialogInfo = data.filter(el=>el.userID === params.id)
-
+    const dialogInfo = props.Items.messageData.filter(el=>el.userID === params.id)
+    console.log(dialogInfo)
 
     return (
         <div className={s.user} >
             <div className={s.user_a}>
                 {props.Items.dialogItems.length
-                    ?props.Items.dialogItems.map(item=><DialogItems id={item.name} name={item.id}></DialogItems>)
+                    ?props.Items.dialogItems.map(item=><DialogItems key={item.id} id={item.id} name={item.name}></DialogItems>)
                     :<div>Item false</div>}
             </div>
             <div className={s.li}>
-                {/*{dialogInfo.map(el=><ul key={el.id}>{el.messages}</ul>)}*/}
-                {props.Items.messageData.map(mas=><div key={mas.id}>{mas.messages}</div>)}
+
+                <ul>
+
+                    {dialogInfo.length
+                        ? dialogInfo.map(el=><li>{el.messages}</li>)
+                        : <li>Is Empty</li>}
+                </ul>
+
             </div>
         </div>
 

@@ -29,7 +29,11 @@ export const allData:AllDataType = {
             {id:"2",userID:"1", messages:"hello"},
             {id:"3",userID:"1", messages:"hey"},
             {id:"4",userID:"2", messages:"ola"},
-            {id:"5",userID:"2", messages:"cu"}
+            {id:"5",userID:"2", messages:"cu"},
+            {id:"6",userID:"2", messages:"cu"},
+            {id:"7",userID:"3", messages:"cu"},
+            {id:"8",userID:"3", messages:"cu"},
+            {id:"9",userID:"3", messages:"cu"}
         ],
         dialogItems:[
             {id:"1", name:"Max"},
