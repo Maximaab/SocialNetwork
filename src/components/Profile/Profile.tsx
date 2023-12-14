@@ -1,8 +1,13 @@
 import React from 'react';
 import s from "./Profile.module.css"
-import {Post} from "./MyPosts/Post/Post";
 import {MyPosts} from "./MyPosts/MyPosts";
-export const Profile = () => {
+import {pdata} from "../data";
+
+type T_Profile = {
+    postData: pdata[]
+}
+
+export const Profile = (props:T_Profile) => {
     return (
         <footer className={s.content}>
             <div>
@@ -12,7 +17,7 @@ export const Profile = () => {
             <div>
                 ava + description
             </div>
-            <MyPosts/>
+            <MyPosts postData={props.postData}/>
         </footer>
     );
 };

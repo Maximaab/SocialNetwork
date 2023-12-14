@@ -2,19 +2,21 @@ import React from 'react';
 import './App.css';
 import {Header} from "./components/Header/Header";
 import {Navbar} from "./components/Navbar/Navbar";
-import {Profile} from "./components/Profile/Profile";
-import {Dialogs} from "./components/Dialogs/Dialogs";
 import Roadmap from "./components/Roadmap/Roadmap";
+import {AllDataType} from "./components/data";
 
+type T_DataType = {
+    allData:AllDataType
 
-function App() {
+}
+function App(props:T_DataType) {
     return (
         <div className="app-wrapper">
             <Header/>
             <Navbar/>
 
             <div className="app-wrapper-content">
-                <Roadmap/>
+                <Roadmap allData={props.allData} />
             </div>
 
         </div>
