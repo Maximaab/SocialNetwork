@@ -5,6 +5,7 @@ import {pdata} from "../data";
 
 type T_Profile = {
     postData: pdata[]
+    addPost:()=>void
 }
 
 export const Profile = (props:T_Profile) => {
@@ -17,7 +18,7 @@ export const Profile = (props:T_Profile) => {
             <div>
                 ava + description
             </div>
-            <MyPosts postData={props.postData}/>
+            <MyPosts postData={props.postData} addPost={props.addPost}/>
         </footer>
     );
 };

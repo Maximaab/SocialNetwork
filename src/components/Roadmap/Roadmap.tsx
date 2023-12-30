@@ -5,11 +5,12 @@ import {AllDataType} from "../data";
 
 type T_AllData = {
     allData:AllDataType
+    addPost:()=>void
 }
 const Roadmap =(props:T_AllData)=>{
     return <Routes>
-<Route path="/profile" element={<Profile postData={props.allData.postData}/>}></Route>
-<Route path="/messages/*" element={<Dialogs Items={props.allData.dialogsData}/>}></Route>
+<Route path="/profile" element={<Profile postData={props.allData.postData} addPost={props.addPost}/>}></Route>
+<Route path="/messages/:id" element={<Dialogs Items={props.allData.dialogsData}/>}></Route>
 {/*<Route path="/news" element={<News/>}></Route>*/}
 {/*<Route path="/music" element={<Music/>}></Route>*/}
 {/*<Route path="/settings" element={<Settings/>}></Route>*/}

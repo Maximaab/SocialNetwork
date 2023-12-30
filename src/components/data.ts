@@ -1,3 +1,5 @@
+import {rerenderEntireThree} from "../index";
+
 export type message = {
     id:string,
     messages:string,
@@ -10,7 +12,8 @@ export type dialog = {
 }
 export type pdata = {
     message:string,
-    likecount:string
+    likecount:string,
+    id:string
 }
 
 export type AllDataType = {
@@ -25,15 +28,15 @@ export type T_DialogsData = {
 export const allData:AllDataType = {
     dialogsData: {
         messageData: [
-            {id:"1",userID:"1", messages:"hi"},
-            {id:"2",userID:"1", messages:"hello"},
-            {id:"3",userID:"1", messages:"hey"},
-            {id:"4",userID:"2", messages:"ola"},
-            {id:"5",userID:"2", messages:"cu"},
-            {id:"6",userID:"2", messages:"cu"},
-            {id:"7",userID:"3", messages:"cu"},
-            {id:"8",userID:"3", messages:"cu"},
-            {id:"9",userID:"3", messages:"cu"}
+            {id:crypto.randomUUID(),userID:"1", messages:"hi"},
+            {id:crypto.randomUUID(),userID:"1", messages:"hello"},
+            {id:crypto.randomUUID(),userID:"1", messages:"hey"},
+            {id:crypto.randomUUID(),userID:"2", messages:"ola"},
+            {id:crypto.randomUUID(),userID:"2", messages:"cu"},
+            {id:crypto.randomUUID(),userID:"2", messages:"cu"},
+            {id:crypto.randomUUID(),userID:"3", messages:"cu"},
+            {id:crypto.randomUUID(),userID:"3", messages:"cu"},
+            {id:crypto.randomUUID(),userID:"3", messages:"cu"}
         ],
         dialogItems:[
             {id:"1", name:"Max"},
@@ -45,10 +48,16 @@ export const allData:AllDataType = {
     },
 
     postData:[
-        {message:"title message", likecount:"5"},
-        {message:"title message", likecount:"5"},
-        {message:"title message", likecount:"5"},
-        {message:"title message", likecount:"5"},
-        {message:"title message", likecount:"5"}
+        {id:crypto.randomUUID(),message:"title message", likecount:"5"},
+        {id:crypto.randomUUID(),message:"title message", likecount:"5"},
+        {id:crypto.randomUUID(),message:"title message", likecount:"5"},
+        {id:crypto.randomUUID(),message:"title message", likecount:"5"},
+        {id:crypto.randomUUID(),message:"title message", likecount:"5"}
     ]
+}
+
+export const addPost =()=>{
+    const newPost = {id:crypto.randomUUID(),message:"URAAAAA", likecount:"0"}
+    allData.postData.push(newPost)
+    rerenderEntireThree()
 }

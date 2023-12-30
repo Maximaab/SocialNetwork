@@ -1,7 +1,7 @@
 import React from 'react';
 import s from "./Dialog.module.css"
 import {NavLink, useParams} from "react-router-dom";
-import {dialog, T_DialogsData} from "../data";
+import {T_DialogsData} from "../data";
 
 type T_DialogType = {
     id: string
@@ -11,7 +11,7 @@ type T_DialogType = {
 
 export const DialogItems = (props: T_DialogType) => {
     return <div>
-        <NavLink to={`/messages/${props.id}`}>{props.name}</NavLink>
+        <NavLink className={s.user} to={`/messages/${props.id}`}>{props.name}</NavLink>
     </div>
 
 }
@@ -24,6 +24,8 @@ type T_DialogsItems = {
 }
 export const Dialogs = (props:T_DialogsItems) => {
     const params = useParams<T_params>()
+    console.log(params.id)
+
     const dialogInfo = props.Items.messageData.filter(el=>el.userID === params.id)
     console.log(dialogInfo)
 
@@ -31,8 +33,8 @@ export const Dialogs = (props:T_DialogsItems) => {
         <div className={s.user} >
             <div className={s.user_a}>
                 {props.Items.dialogItems.length
-                    ?props.Items.dialogItems.map(item=><DialogItems key={item.id} id={item.id} name={item.name}></DialogItems>)
-                    :<div>Item false</div>}
+                    ? props.Items.dialogItems.map(item=><DialogItems key={item.id} id={item.id} name={item.name}></DialogItems>)
+                    : <div>Item false</div>}
             </div>
             <div className={s.li}>
 
