@@ -6,13 +6,14 @@ import React from "react";
 
 type T_AllData = {
     allData:AllDataType
-    addPost:()=>void
+    addPost:(value:string)=>void
+    onChangePostValue:(value:string)=>void
 }
 export class Roadmap extends React.Component<T_AllData> {
     render() {
-        const {allData, addPost} = this.props
+        const {allData, addPost,onChangePostValue} = this.props
         return <Routes>
-             <Route path="/profile" element={<Profile postData={allData.postData} addPost={addPost}/>}></Route>
+             <Route path="/profile" element={<Profile ProfilePage={allData.ProfilePage} addPost={addPost} onChangePostValue={onChangePostValue}/>}></Route>
              <Route path="/messages/:id" element={<Dialogs Items={allData.dialogsData}/>}></Route>
              {/*<Route path="/news" element={<News/>}></Route>*/}
              {/*<Route path="/music" element={<Music/>}></Route>*/}

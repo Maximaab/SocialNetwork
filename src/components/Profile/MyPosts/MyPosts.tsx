@@ -1,21 +1,40 @@
-import React from 'react';
+import React, {ChangeEvent} from 'react';
 import s from "./MyPosts.module.css"
 import {Post} from "./Post/Post";
-import {addPost, pdata} from "../../data";
+import {pdata} from "../../data";
+
 type T_MyPost = {
-    postData: pdata[]
-    addPost:()=>void
+    ProfilePage: {newValueForPost: string,postData: pdata[]}
+    addPost:(value:string)=>void
+    onChangePostValue:(value:string)=>void
+}
+type I_Props = {
+    textValue:string
 }
 
-export class MyPosts extends React.Component<T_MyPost> {
+export class MyPosts extends React.Component<T_MyPost, I_Props> {
+    // constructor(props:T_MyPost | Readonly<T_MyPost>) {
+    //     super(props);
+    //     this.state = {
+    //         textValue: ""
+    //     }
+    // }
     render() {
-        const {postData, addPost} = this.props
+        const {ProfilePage, addPost, onChangePostValue} = this.props
+        // const {textValue} = this.state
+        const onClickHandler = () =>{
+            addPost(ProfilePage.newValueForPost)
+            // this.setState({textValue: " "})
+        }
+        const onChangeHandler = (e:ChangeEvent<HTMLTextAreaElement>) =>{
+            onChangePostValue(e.currentTarget.value)
+        }
         return (<div>
-                         <textarea></textarea>
-                         <button onClick={addPost}>Add post</button>
+                         <textarea  onChange={onChangeHandler}></textarea>
+                         <button onClick={onClickHandler}>Add post</button>
                          <div className={s.posts}>
-                             {postData.length?
-                     postData.map(post=><Post message={post.message} likecount={post.likecount}></Post>)
+                             {ProfilePage.postData.length?
+                                 ProfilePage.postData.map(post=><Post message={post.message} likecount={post.likecount}></Post>)
                      :<div>Post empty</div>}
              </div>
      </div>

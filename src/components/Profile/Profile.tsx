@@ -4,13 +4,14 @@ import {MyPosts} from "./MyPosts/MyPosts";
 import {pdata} from "../data";
 
 type T_Profile = {
-    postData: pdata[]
-    addPost: () => void
+    ProfilePage: {newValueForPost: string,postData: pdata[]}
+    addPost: (value:string) => void
+    onChangePostValue:(value:string)=>void
 }
 
 export class Profile extends React.Component<T_Profile> {
     render() {
-        const {postData, addPost} = this.props
+        const {ProfilePage, addPost, onChangePostValue} = this.props
         return <footer className={s.content}>
             <div>
                 <img
@@ -19,7 +20,7 @@ export class Profile extends React.Component<T_Profile> {
             <div>
                 ava + description
             </div>
-            <MyPosts postData={postData} addPost={addPost}/>
+            <MyPosts ProfilePage={ProfilePage} addPost={addPost} onChangePostValue={onChangePostValue}/>
         </footer>
     }
 }
