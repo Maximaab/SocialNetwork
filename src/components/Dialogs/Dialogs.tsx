@@ -1,7 +1,7 @@
 import React from 'react';
 import s from "./Dialog.module.css"
 import {NavLink, useParams} from "react-router-dom";
-import {T_DialogsData} from "../data";
+import {T_DialogsData} from "../data/data";
 
 type T_DialogType = {
     id: string

@@ -1,19 +1,20 @@
 import {Route, Routes} from "react-router-dom";
 import {Profile} from "../Profile/Profile";
 import {DialogItems, Dialogs} from "../Dialogs/Dialogs";
-import {AllDataType} from "../data";
+import {AllDataType} from "../data/data";
 import React from "react";
 
 type T_AllData = {
     allData:AllDataType
-    addPost:(value:string)=>void
-    onChangePostValue:(value:string)=>void
+
+
+    dispatch:(action:any)=>void
 }
 export class Roadmap extends React.Component<T_AllData> {
     render() {
-        const {allData, addPost,onChangePostValue} = this.props
+        const {allData, dispatch} = this.props
         return <Routes>
-             <Route path="/profile" element={<Profile ProfilePage={allData.ProfilePage} addPost={addPost} onChangePostValue={onChangePostValue}/>}></Route>
+             <Route path="/profile" element={<Profile ProfilePage={allData.ProfilePage}  dispatch={dispatch} />}></Route>
              <Route path="/messages/:id" element={<Dialogs Items={allData.dialogsData}/>}></Route>
              {/*<Route path="/news" element={<News/>}></Route>*/}
              {/*<Route path="/music" element={<Music/>}></Route>*/}

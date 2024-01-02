@@ -1,7 +1,7 @@
 import React from 'react';
 import s from './Navbar.module.css';
 import {NavLink} from "react-router-dom";
-import {dialog, T_DialogsData} from "../data";
+import {dialog, T_DialogsData} from "../data/data";
 
 type NavbarType = {
     dialogData:dialog[]

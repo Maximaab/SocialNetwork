@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import {BrowserRouter} from "react-router-dom";
-import {AllDataType, Store, T_Store} from "./components/data";
+import {AllDataType, Store, T_Store} from "./components/data/data";
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -14,7 +14,7 @@ export const rerenderEntireThree = (state:AllDataType)=>{
     root.render(
         <React.StrictMode>
             <BrowserRouter>
-                <App allData={state} addPost={Store.addPost.bind(Store)} onChangePostValue={Store.onChangePostValue.bind(Store)}  />
+                <App allData={state} dispatch={Store.dispatch.bind(Store)}  />
             </BrowserRouter>
 
         </React.StrictMode>

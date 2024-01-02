@@ -1,4 +1,4 @@
-import {rerenderEntireThree} from "../index";
+import {ActionType, ProfileReducer} from "./reducer/reducer";
 
 export type message = {
     id: string,
@@ -15,25 +15,29 @@ export type pdata = {
     likecount: string,
     id: string
 }
+export type T_ProfilePage={
+    newValueForPost: string,
+    postData: pdata[]
+}
 
 export type AllDataType = {
     dialogsData: T_DialogsData
-    ProfilePage: { newValueForPost: string, postData: pdata[] }
+    ProfilePage: T_ProfilePage
 }
 export type T_DialogsData = {
     messageData: message[]
     dialogItems: dialog[]
 }
 export type T_Store = {
-    _allData:AllDataType
-    addPost:(title:string)=>void
-    onChangePostValue:(value: string)=>void
-    getData:()=>AllDataType
-    _callSubscriber:(state:AllDataType)=>void
-    subscribe:(observer:(state:AllDataType)=>void)=>void
+    _allData: AllDataType
+    getData: () => AllDataType
+    _callSubscriber: (state: AllDataType) => void
+    subscribe: (observer: (state: AllDataType) => void) => void
+    dispatch:(action:any)=>void
 
 }
-export const Store:T_Store = {
+type T_MainDuspatch = ActionType
+export const Store: T_Store = {
     _allData: {
         dialogsData: {
             messageData: [
@@ -66,26 +70,30 @@ export const Store:T_Store = {
             ]
         }
     },
-    getData()  {
+    getData() {
         return this._allData
     },
-    addPost(title: string) {
-        const newPost = {id: crypto.randomUUID(), message: title, likecount: "0"}
-        this._allData.ProfilePage.postData.push(newPost)
-        this._allData.ProfilePage.newValueForPost = " "
-        // rerenderEntireThree(Store.getData())
+    dispatch(action:T_MainDuspatch){
+
+        ProfileReducer(this._allData.ProfilePage,action)
         this._callSubscriber(this._allData)
+        // if(action.type === addPostAC) {
+        //     const newPost = {id: crypto.randomUUID(), message: action.title, likecount: "0"}
+        //     this._allData.ProfilePage.postData.push(newPost)
+        //     this._allData.ProfilePage.newValueForPost = " "
+        //     // rerenderEntireThree(Store.getData())
+        //     this._callSubscriber(this._allData)
+        // } else if (action.type === onChangePostValueAC) {
+        //     this._allData.ProfilePage.newValueForPost = action.value
+        // }
+    },
+
+
+    _callSubscriber(state: AllDataType) {
 
     },
-    onChangePostValue(value: string) {
-        this._allData.ProfilePage.newValueForPost = value
-
-    },
-    _callSubscriber(state:AllDataType){
-
-    },
-    subscribe(observer:(state:AllDataType)=>void){
-    this._callSubscriber = observer
+    subscribe(observer: (state: AllDataType) => void) {
+        this._callSubscriber = observer
     }
 }
 // export const allData: AllDataType = {

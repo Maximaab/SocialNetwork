@@ -3,23 +3,24 @@ import './App.css';
 import {Header} from "./components/Header/Header";
 import {Navbar} from "./components/Navbar/Navbar";
 import Roadmap from "./components/Roadmap/Roadmap";
-import {AllDataType} from "./components/data";
+import {AllDataType} from "./components/data/data";
 
 type T_DataType = {
     allData: AllDataType
-    addPost: (value:string) => void
-    onChangePostValue:(value:string)=>void
+
+
+    dispatch:(action:any)=>void
 }
 
 class App extends React.Component<T_DataType> {
     render() {
-        const {allData, addPost,onChangePostValue} = this.props
+        const {allData,dispatch} = this.props
         return <div className="app-wrapper">
             <Header/>
             <Navbar dialogData={allData.dialogsData.dialogItems}/>
 
             <div className="app-wrapper-content">
-                <Roadmap allData={allData} addPost={addPost} onChangePostValue={onChangePostValue}/>
+                <Roadmap allData={allData}   dispatch={dispatch}/>
             </div>
         </div>;
     }

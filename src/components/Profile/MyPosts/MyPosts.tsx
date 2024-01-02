@@ -1,12 +1,12 @@
 import React, {ChangeEvent} from 'react';
 import s from "./MyPosts.module.css"
 import {Post} from "./Post/Post";
-import {pdata} from "../../data";
+import {pdata} from "../../data/data";
+import {addPostAC, onChangePostValueAC} from "../../../helpers/action/action.type";
 
 type T_MyPost = {
     ProfilePage: {newValueForPost: string,postData: pdata[]}
-    addPost:(value:string)=>void
-    onChangePostValue:(value:string)=>void
+    dispatch:(action:any)=>void
 }
 type I_Props = {
     textValue:string
@@ -20,17 +20,19 @@ export class MyPosts extends React.Component<T_MyPost, I_Props> {
     //     }
     // }
     render() {
-        const {ProfilePage, addPost, onChangePostValue} = this.props
+        const {ProfilePage, dispatch} = this.props
         // const {textValue} = this.state
         const onClickHandler = () =>{
-            addPost(ProfilePage.newValueForPost)
-            // this.setState({textValue: " "})
-        }
+
+            dispatch({type:addPostAC, title:this.props.ProfilePage.newValueForPost})
+             }
         const onChangeHandler = (e:ChangeEvent<HTMLTextAreaElement>) =>{
-            onChangePostValue(e.currentTarget.value)
+
+            dispatch({type:onChangePostValueAC, defaultValue:e.currentTarget.value})
+
         }
         return (<div>
-                         <textarea  onChange={onChangeHandler}></textarea>
+                         <textarea  onChange={onChangeHandler} value={ProfilePage.newValueForPost}></textarea>
                          <button onClick={onClickHandler}>Add post</button>
                          <div className={s.posts}>
                              {ProfilePage.postData.length?

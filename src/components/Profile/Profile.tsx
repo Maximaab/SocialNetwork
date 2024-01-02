@@ -1,17 +1,18 @@
 import React from 'react';
 import s from "./Profile.module.css"
 import {MyPosts} from "./MyPosts/MyPosts";
-import {pdata} from "../data";
+import {pdata} from "../data/data";
 
 type T_Profile = {
     ProfilePage: {newValueForPost: string,postData: pdata[]}
-    addPost: (value:string) => void
-    onChangePostValue:(value:string)=>void
+
+
+    dispatch:(action:any)=>void
 }
 
 export class Profile extends React.Component<T_Profile> {
     render() {
-        const {ProfilePage, addPost, onChangePostValue} = this.props
+        const {ProfilePage, dispatch} = this.props
         return <footer className={s.content}>
             <div>
                 <img
@@ -20,7 +21,7 @@ export class Profile extends React.Component<T_Profile> {
             <div>
                 ava + description
             </div>
-            <MyPosts ProfilePage={ProfilePage} addPost={addPost} onChangePostValue={onChangePostValue}/>
+            <MyPosts ProfilePage={ProfilePage}   dispatch={dispatch}/>
         </footer>
     }
 }
