@@ -1,26 +1,19 @@
 import React from 'react';
 import './App.css';
 import {Header} from "./components/Header/Header";
-import {Navbar} from "./components/Navbar/Navbar";
-import Roadmap from "./components/Roadmap/Roadmap";
-import {AllDataType} from "./components/data/data";
-
-type T_DataType = {
-    allData: AllDataType
+import {Roadmap} from "./components/Roadmap/Roadmap";
+import {NavbarCantainer} from "./components/Navbar/Navbar.cantainer";
 
 
-    dispatch:(action:any)=>void
-}
-
-class App extends React.Component<T_DataType> {
+class App extends React.Component<any> {
     render() {
-        const {allData,dispatch} = this.props
+
         return <div className="app-wrapper">
             <Header/>
-            <Navbar dialogData={allData.dialogsData.dialogItems}/>
+            <NavbarCantainer/>
 
             <div className="app-wrapper-content">
-                <Roadmap allData={allData}   dispatch={dispatch}/>
+                <Roadmap/>
             </div>
         </div>;
     }

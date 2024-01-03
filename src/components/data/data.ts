@@ -1,4 +1,4 @@
-import {ActionType, ProfileReducer} from "./reducer/reducer";
+import {ActionType, ProfileReducer} from "./reducer/profileReducer";
 
 export type message = {
     id: string,
@@ -36,7 +36,7 @@ export type T_Store = {
     dispatch:(action:any)=>void
 
 }
-type T_MainDuspatch = ActionType
+export type T_MainDuspatch = ActionType
 export const Store: T_Store = {
     _allData: {
         dialogsData: {

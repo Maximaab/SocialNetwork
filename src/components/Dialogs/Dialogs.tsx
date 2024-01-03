@@ -25,23 +25,21 @@ export class DialogItems extends React.Component<T_DialogType> {
 //
 // }
 
-type T_params = {
-    id: string
-}
+
 type T_DialogsItems = {
-    Items: T_DialogsData
+    dialogItems: T_DialogsData
 }
 
 export class Dialogs extends React.Component<T_DialogsItems> {
     render() {
-        const {Items} = this.props
-        const dialogInfo = Items.messageData.filter(el => el.userID === "1")
+        const {dialogItems} = this.props
+        const dialogInfo = dialogItems.messageData.filter(el => el.userID === "1")
         return (
             <div className={s.user}>
                 <div className={s.user_a}>
-                    {Items.dialogItems.length
-                        ? Items.dialogItems.map(item => <DialogItems key={item.id} id={item.id}
-                                                                     name={item.name}></DialogItems>)
+                    {dialogItems.dialogItems.length
+                        ? dialogItems.dialogItems.map(item => <DialogItems key={item.id} id={item.id}
+                                                                           name={item.name}></DialogItems>)
                         : <div>Item false</div>}
                 </div>
                 <div className={s.li}>
