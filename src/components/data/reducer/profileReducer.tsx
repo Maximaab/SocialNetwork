@@ -1,4 +1,4 @@
-import {AllDataType, T_ProfilePage, T_Store} from "../data";
+import {T_ProfilePage} from "../data";
 import {addPostAC, onChangePostValueAC} from "../../../helpers/action/action.type";
 
 type T_AddPost = {

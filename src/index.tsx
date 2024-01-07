@@ -3,7 +3,6 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import {BrowserRouter} from "react-router-dom";
-import {AllDataType, Store, T_Store} from "./components/data/data";
 import {Provider} from "react-redux";
 import {ReduxStore} from "./components/data/redux/store";
 

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {ChangeEvent} from 'react';
 import s from "./Dialog.module.css"
 import {NavLink, useParams} from "react-router-dom";
 import {T_DialogsData} from "../data/data";
@@ -27,13 +27,21 @@ export class DialogItems extends React.Component<T_DialogType> {
 
 
 type T_DialogsItems = {
-    dialogItems: T_DialogsData
+    dialogItems: T_DialogsData,
+    ChangeNewMessage:(message:string)=>void,
+    AddNewValue:()=>void
 }
 
 export class Dialogs extends React.Component<T_DialogsItems> {
     render() {
-        const {dialogItems} = this.props
+        const {dialogItems,ChangeNewMessage,AddNewValue} = this.props
         const dialogInfo = dialogItems.messageData.filter(el => el.userID === "1")
+        const onChengeHandler=(e:ChangeEvent<HTMLInputElement>)=>{
+        ChangeNewMessage(e.currentTarget.value)
+        }
+        const onClickHandler=()=>{
+            AddNewValue()
+        }
         return (
             <div className={s.user}>
                 <div className={s.user_a}>
@@ -50,6 +58,8 @@ export class Dialogs extends React.Component<T_DialogsItems> {
                             ? dialogInfo.map(el => <li>{el.messages}</li>)
                             : <li>Is Empty</li>}
                     </ul>
+                    <input onChange={onChengeHandler} value={dialogItems.newValueForInput}/>
+                    <button onClick={onClickHandler}>+</button>
 
                 </div>
             </div>

@@ -1,10 +1,12 @@
 import {combineReducers, legacy_createStore} from "redux";
 import {ProfileReducer} from "../reducer/profileReducer";
 import {DialogsReducer} from "../reducer/dialogsReducer";
+import {UsersReducer} from "../reducer/usersReducer";
 
 export const rootReducer = combineReducers({
     ProfileReducer:ProfileReducer,
-    DialogsReducer:DialogsReducer
+    DialogsReducer:DialogsReducer,
+    UsersReducer:UsersReducer
 })
 
 export const ReduxStore = legacy_createStore(rootReducer)
