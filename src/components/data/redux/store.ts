@@ -12,3 +12,6 @@ export const rootReducer = combineReducers({
 export const ReduxStore = legacy_createStore(rootReducer)
 export type RootState = ReturnType<typeof ReduxStore.getState>
 export type AppDispatch = typeof ReduxStore.dispatch
+
+// @ts-ignore
+window.store = ReduxStore
