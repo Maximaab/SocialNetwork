@@ -12,9 +12,9 @@ export class Roadmap extends React.Component<any> {
              <Route path="/profile"
                     element={<Profile />}></Route>
              <Route path="/messages/:id"
-                    element={<DialogsContainer/>}></Route>
+                    element={<DialogsContainer />}></Route>
             <Route path="/users"
-                   element={<UserContainer/>}></Route>
+                   element={<UserContainer />}></Route>
              <Route path="/*"
                     element={<div>error</div>}></Route>
                  </Routes>
