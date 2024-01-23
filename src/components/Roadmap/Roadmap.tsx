@@ -2,7 +2,7 @@ import {Route, Routes} from "react-router-dom";
 import {Profile} from "../Profile/Profile";
 import React from "react";
 import DialogsContainer from "../Dialogs/Dialogs.Container";
-import Users from "../Users/Users";
+
 import {UserContainer} from "../Users/User.Container";
 
 export class Roadmap extends React.Component<any> {

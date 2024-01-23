@@ -4,6 +4,7 @@ export type T_UsersInitialType = {
     error: string | null
     pageSize:number
     activePage: number
+    isFetching:boolean
 }
 
 export type UserBody = {
@@ -21,7 +22,8 @@ let initialState: T_UsersInitialType = {
     totalCount: 2,
     error: null,
     pageSize:10,
-    activePage: 1
+    activePage: 1,
+    isFetching:true
 }
 export const UsersReducer = (state = initialState, action: ActionType) => {
     switch (action.type) {
@@ -34,13 +36,15 @@ export const UsersReducer = (state = initialState, action: ActionType) => {
             return {...state, items: action.users, totalCount:action.totalCount}
         case "Active_Page":
             return {...state, activePage: action.pageNumber}
+        case "IS_FETCHING":
+            return {...state, isFetching:action.status}
         default:
             return state
     }
 
 }
 
-type ActionType = changeFollowACType | setNewUsersACType | setNewActivePageACType
+type ActionType = changeFollowACType | setNewUsersACType | setNewActivePageACType | setIsFetchingACType
 type changeFollowACType = ReturnType<typeof changeFollowAC>
 export const changeFollowAC = (userID: number, follow: boolean) => {
     return {
@@ -64,5 +68,14 @@ export const setNewActivePageAC=(pageNumber:number)=>{
     return {
         type:"Active_Page",
         pageNumber
+    }as const
+}
+type setIsFetchingACType = ReturnType<typeof setIsFetchingAC>
+export const setIsFetchingAC=(status:boolean)=>{
+    return {
+        type:"IS_FETCHING",
+        status
+
+
     }as const
 }

@@ -1,8 +1,8 @@
 import {connect} from "react-redux";
-import Users from "./Users";
+
 import {AppDispatch, RootState} from "../data/redux/store";
 import {
-    changeFollowAC,
+    changeFollowAC, setIsFetchingAC,
     setNewActivePageAC,
     setNewUsersAC,
     T_UsersInitialType,
@@ -10,33 +10,43 @@ import {
 } from "../data/reducer/usersReducer";
 import React from "react";
 import axios from "axios";
+import {Users} from "./Users";
+import {users_api} from "../../API/users_api";
 
 export type UsersPropsType = {
-    changeFollowStatus: (userID: number, follow: boolean) => void,
+    changeFollowAC: (userID: number, follow: boolean) => void,
     users: UserBody[]
-    setUsersFromServer: (usersData: UserBody[], totalCount: number, error: string | null) => void
-    setNewActivePage: (pageNumber: number) => void
-    activePage:number
-    pageSize:number
-    totalCount:number
+    setNewUsersAC: (usersData: UserBody[], totalCount: number, error: string | null) => void
+    setNewActivePageAC: (pageNumber: number) => void
+    activePage: number
+    pageSize: number
+    totalCount: number
+    isFetching: boolean
+    setIsFetchingAC: (status: boolean) => void
 }
 
 class SuperUserContainer extends React.Component<UsersPropsType> {
     componentDidMount() {
-        axios.get<T_UsersInitialType>(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.activePage}`).then((res) => {
-            this.props.setUsersFromServer(res.data.items, res.data.totalCount, res.data.error)
+        users_api.getUsers(this.props.activePage).then((res) => {
+            this.props.setNewUsersAC(res.data.items, res.data.totalCount, res.data.error)
+        }).finally(() => {
+            this.props.setIsFetchingAC(false)
         })
     }
 
     onPageChangeHandler(pageNumber: number) {
-        this.props.setNewActivePage(pageNumber);
-        axios.get<T_UsersInitialType>(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}`).then((res) => {
-            this.props.setUsersFromServer(res.data.items, res.data.totalCount, res.data.error)
+        this.props.setNewActivePageAC(pageNumber);
+        this.props.setIsFetchingAC(true)
+
+        users_api.getUsers(pageNumber).then((res) => {
+            this.props.setNewUsersAC(res.data.items, res.data.totalCount, res.data.error)
+        }).finally(() => {
+            this.props.setIsFetchingAC(false)
         })
     }
 
     render() {
-        return <Users {...this.props} onPageChangeHandler={this.onPageChangeHandler.bind(this)} />;
+        return <Users {...this.props} onPageChangeHandler={this.onPageChangeHandler.bind(this)}/>;
     }
 }
 
@@ -45,22 +55,31 @@ const MyStateToProps = (state: RootState) => {
         users: state.UsersReducer?.items,
         activePage: state.UsersReducer?.activePage,
         pageSize: state.UsersReducer?.pageSize,
-        totalCount: state.UsersReducer?.totalCount
+        totalCount: state.UsersReducer?.totalCount,
+        isFetching: state.UsersReducer?.isFetching
     }
 }
-const MyDispatchToProps = (dispatch: AppDispatch) => {
-    return {
-        changeFollowStatus(userID: number, follow: boolean) {
-            dispatch(changeFollowAC(userID, follow))
-        },
-        setUsersFromServer(usersData: UserBody[], totalCount: number,
-                           error: string | null) {
-            dispatch(setNewUsersAC(usersData, totalCount, error))
-        },
-        setNewActivePage(pageNumber: number) {
-            dispatch(setNewActivePageAC(pageNumber))
-        }
-    }
+// const MyDispatchToProps = (dispatch: AppDispatch) => {
+//     return {
+//         changeFollowStatus(userID: number, follow: boolean) {
+//             dispatch(changeFollowAC(userID, follow))
+//         },
+//         setUsersFromServer(usersData: UserBody[], totalCount: number,
+//                            error: string | null) {
+//             dispatch(setNewUsersAC(usersData, totalCount, error))
+//         },
+//         setNewActivePage(pageNumber: number) {
+//             dispatch(setNewActivePageAC(pageNumber))
+//         },
+//         setIsFetching(status: boolean) {
+//             dispatch(setIsFetchingAC(status))
+//         }
+//     }
+// }
+const mapDispatch = {
+    changeFollowAC,
+    setNewUsersAC,
+    setNewActivePageAC,
+    setIsFetchingAC
 }
-
-export const UserContainer = connect(MyStateToProps, MyDispatchToProps)(SuperUserContainer)
+export const UserContainer = connect(MyStateToProps, mapDispatch)(SuperUserContainer)
