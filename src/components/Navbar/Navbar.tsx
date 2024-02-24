@@ -13,7 +13,7 @@ export class Navbar extends React.Component<NavbarType> {
         const firstList = dialogData[0].id
         return <nav className={s.nav}>
             <div>
-                <NavLink className={({isActive}) => isActive ? s.item_active : s.item} to={"/profile"}>Profile</NavLink>
+                <NavLink className={({isActive}) => isActive ? s.item_active : s.item} to={"/profile/2"}>Profile</NavLink>
             </div>
             <div>
                 <NavLink className={({isActive}) => isActive ? s.item_active : s.item}

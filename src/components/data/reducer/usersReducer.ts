@@ -2,9 +2,9 @@ export type T_UsersInitialType = {
     items: UserBody[]
     totalCount: number
     error: string | null
-    pageSize:number
+    pageSize: number
     activePage: number
-    isFetching:boolean
+    isFetching: boolean
 }
 
 export type UserBody = {
@@ -21,23 +21,24 @@ let initialState: T_UsersInitialType = {
     items: [],
     totalCount: 2,
     error: null,
-    pageSize:10,
+    pageSize: 10,
     activePage: 1,
-    isFetching:true
+    isFetching: true
 }
-export const UsersReducer = (state = initialState, action: ActionType) => {
+export const UsersReducer = (state = initialState, action: ActionType):T_UsersInitialType => {
     switch (action.type) {
         case "CHANGE_FOLLOW":
+            console.log(action.followed)
             return {
                 ...state,
-                users: state.items.map(user => user.id === action.userID ? {...user, follow: action.follow} : user)
+                items: state.items.map(user => user.id === action.userID ? {...user, followed: action.followed} : user)
             }
         case "SET_USERS":
-            return {...state, items: action.users, totalCount:action.totalCount}
+            return {...state, items: action.users, totalCount: action.totalCount}
         case "Active_Page":
             return {...state, activePage: action.pageNumber}
         case "IS_FETCHING":
-            return {...state, isFetching:action.status}
+            return {...state, isFetching: action.status}
         default:
             return state
     }
@@ -46,15 +47,15 @@ export const UsersReducer = (state = initialState, action: ActionType) => {
 
 type ActionType = changeFollowACType | setNewUsersACType | setNewActivePageACType | setIsFetchingACType
 type changeFollowACType = ReturnType<typeof changeFollowAC>
-export const changeFollowAC = (userID: number, follow: boolean) => {
+export const changeFollowAC = (userID: number, followed: boolean) => {
     return {
         type: "CHANGE_FOLLOW",
-        follow,
+        followed,
         userID
     } as const
 }
 type setNewUsersACType = ReturnType<typeof setNewUsersAC>
-export const setNewUsersAC = (users: UserBody[], totalCount: number ,
+export const setNewUsersAC = (users: UserBody[], totalCount: number,
                               error: string | null) => {
     return {
         type: "SET_USERS",
@@ -64,18 +65,18 @@ export const setNewUsersAC = (users: UserBody[], totalCount: number ,
     } as const
 }
 type setNewActivePageACType = ReturnType<typeof setNewActivePageAC>
-export const setNewActivePageAC=(pageNumber:number)=>{
+export const setNewActivePageAC = (pageNumber: number) => {
     return {
-        type:"Active_Page",
+        type: "Active_Page",
         pageNumber
-    }as const
+    } as const
 }
 type setIsFetchingACType = ReturnType<typeof setIsFetchingAC>
-export const setIsFetchingAC=(status:boolean)=>{
+export const setIsFetchingAC = (status: boolean) => {
     return {
-        type:"IS_FETCHING",
+        type: "IS_FETCHING",
         status
 
 
-    }as const
+    } as const
 }

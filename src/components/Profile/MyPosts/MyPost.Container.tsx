@@ -1,6 +1,5 @@
-import React, {ChangeEvent} from "react";
+import {ChangeEvent} from "react";
 import {addPostAC, onChangePostValueAC} from "../../../helpers/action/action.type";
-import {pdata, T_MainDuspatch, T_ProfilePage} from "../../data/data";
 import {MyPosts} from "./MyPosts";
 import {AppDispatch, RootState} from "../../data/redux/store";
 import {connect} from "react-redux";

@@ -14,7 +14,7 @@ import {Users} from "./Users";
 import {users_api} from "../../API/users_api";
 
 export type UsersPropsType = {
-    changeFollowAC: (userID: number, follow: boolean) => void,
+    changeFollowAC: (userID: number, followed: boolean) => void,
     users: UserBody[]
     setNewUsersAC: (usersData: UserBody[], totalCount: number, error: string | null) => void
     setNewActivePageAC: (pageNumber: number) => void
@@ -28,6 +28,7 @@ export type UsersPropsType = {
 class SuperUserContainer extends React.Component<UsersPropsType> {
     componentDidMount() {
         users_api.getUsers(this.props.activePage).then((res) => {
+
             this.props.setNewUsersAC(res.data.items, res.data.totalCount, res.data.error)
         }).finally(() => {
             this.props.setIsFetchingAC(false)

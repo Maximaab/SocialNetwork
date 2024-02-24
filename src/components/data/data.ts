@@ -1,4 +1,4 @@
-import {ActionType} from "./reducer/profileReducer";
+import {ActionType, T_ProfilePage} from "./reducer/profileReducer";
 
 export type message = {
     id: string,
@@ -15,10 +15,7 @@ export type pdata = {
     likecount: string,
     id: string
 }
-export type T_ProfilePage={
-    newValueForPost: string,
-    postData: pdata[]
-}
+
 
 export type AllDataType = {
     dialogsData: T_DialogsData

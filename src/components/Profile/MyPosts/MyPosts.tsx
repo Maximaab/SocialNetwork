@@ -1,8 +1,7 @@
 import React, {ChangeEvent} from 'react';
 import s from "./MyPosts.module.css"
 import {Post} from "./Post/Post";
-import {pdata, T_ProfilePage} from "../../data/data";
-import {addPostAC, onChangePostValueAC} from "../../../helpers/action/action.type";
+import {pdata} from "../../data/data";
 
 type T_MyPost = {
     ProfilePage: { newValueForPost: string, postData: pdata[] }
@@ -13,7 +12,7 @@ type T_MyPost = {
 //     textValue:string
 // }
 
-export class MyPosts extends React.Component<T_MyPost, any> {
+export class MyPosts extends React.Component<T_MyPost> {
 
     render() {
         const {ProfilePage, onClickHandler, onChangeHandler} = this.props
